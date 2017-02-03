@@ -146,8 +146,23 @@ Sourdough ... $5.29
 Rye ... $5.09
 Whole Wheat ... $4.49
 ===================== */
+    // How we did it with a "for" loop:
+    //
+    // var printMenu = function(foodList){  // pass the function an array of objects and have it return a menu
+    //     for (i = 0; i < foodList.length; i++) {
+    //       console.log(foodList[i].name + " ... " + foodList[i].cost);
+    //     }
+    //
+    // };
 
-// printMenu(query7);
+    var printMenu2 = function(foodList) {
+      _.each(foodList, function(menu) {
+        console.log(menu.name + ' ... $' + menu.price);
+      });
+    };
+
+
+
 
 /* =====================
 Stretch Goal:

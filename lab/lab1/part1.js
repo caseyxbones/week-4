@@ -146,7 +146,8 @@ Sourdough ... $5.29
 Rye ... $5.09
 Whole Wheat ... $4.49
 ===================== */
-    // How we did it with a "for" loop:
+
+    // How we did it a simple print menu with a "for" loop but without a specific grouping/oprder:
     //
     // var printMenu = function(foodList){  // pass the function an array of objects and have it return a menu
     //     for (i = 0; i < foodList.length; i++) {
@@ -154,13 +155,27 @@ Whole Wheat ... $4.49
     //     }
     //
     // };
+    // This will combine the two functions we made above, the printMenu function and the toOrder funtion
+    // printMenu(toOrder(menuList, quantityMin)); -->  this will print the menu for any items that have less than the specific quantityMin
 
-    var printMenu2 = function(foodList) {
-      _.each(foodList, function(menu) {
-        console.log(menu.name + ' ... $' + menu.price);
-      });
-    };
 
+
+// The issue is that query 7 is an object that contains 2 arrays that each contain 3 objects
+// you can't call an object's length or specific place with object[i], you have to use object.thing
+      // you can call query7.Bread to get the array with all the breads
+      // you can call query7.Cake to get the array with all the cakes
+      // you can call query7.Bread[0].name and get the price of Sourdough
+      // you can call query7.Bread[0].price and get the price of Sourdough
+_.each(foodList, function(food)
+
+var printmenu2 = _.each(foodList, function())
+
+    var printMenu2 = _.each(foodList.Cake, function(foodList); {
+          console.log(menu.Cake[0].name + ' ... $' + menu.Cake[0].price);
+
+    }
+
+    printMenu2(query7);
 
 
 

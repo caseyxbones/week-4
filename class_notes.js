@@ -26,3 +26,18 @@
           var generateID = function (options) {
             return options.name + options.number;
           };
+
+
+// LOOKING AT PROPERTIES
+
+      // _.isFunction
+      // _.isArray
+      // _.isObject
+      // _.where
+      // _.filter
+      // _.sortBy
+      // _.groupBy
+
+// AJAX
+
+    // Ajax creates "a promise" that there will be some response if you give it time

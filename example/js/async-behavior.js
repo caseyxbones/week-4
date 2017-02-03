@@ -5,7 +5,7 @@ var runAfter = function(run, runArg, runDelay, delayFunc) {
   // This 'Deferred' thing is exactly what ajax calls use!
   var d = $.Deferred();
   d.promise()
-    .done(function(a) { // A callback function
+    .done(function(a) { // A callback function --> define a function is running ahead of time and see it doing something down the road
       console.log("Running provided function after", delayFunc(runDelay) / 1000, "seconds");
       run(a);
     });
@@ -49,5 +49,3 @@ addButton.click(function() {
   var oldCount = parseInt(addCounter.text(), 10);
   runAfter(addOneToCounter, oldCount, delay, delayFunc);
 });
-
-

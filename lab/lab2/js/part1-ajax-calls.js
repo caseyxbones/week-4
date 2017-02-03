@@ -19,7 +19,9 @@
   This recipe, can be used by underscore's _.filter. It will return only words with
    >=5 characters.
 ===================== */
-var isLengthOfFiveOrMore = function(str) {};
+var isLengthOfFiveOrMore = function(str) {
+  return str.length > 5;
+};
 
 console.log("isLengthOfFiveOrMore success:",
   _.isEqual(_.filter(['this', 'is','a', 'test', 'testing'], isLengthOfFiveOrMore), ['testing']));
@@ -30,15 +32,28 @@ console.log("isLengthOfFiveOrMore success:",
   function you write along with underscore's _.each to log the double of every
   number in the provided array.
 ===================== */
-var logDouble = function(num) {};
-var theArray = [1, 5, 20, 100];
+// var pbj = function(peanutButter, jelly, bread) {
+//   stack(bread);
+//   smear(peanutButter);
+//   smear(jelly);
+//   stack(bread);
+// }
+
+var logDouble = function(num){      // this is the function you will call in _.each
+    console.log(num*2);
+};
+var theArray = [1, 5, 20, 100];     // this is the list you will have _.each run through using the provided function
+
+_.each(theArray, logDouble);        // _.each is now going through the array and applying the function logDouble to it
+
 
 
 /* =====================
   Given this already defined function, define fizzbuzzArray so that, when mapped
   over, it will equal ['fizz', 'buzz', 'fizzbuzz'];
 ===================== */
-var fizzbuzzArray = [];
+
+var fizzbuzzArray = ['3', '5', 'fizzbuzz'];
 var fizzbuzzFunc = function(num) {
   var str = '';
   if (num % 3 === 0) { str = 'fizz'; }
@@ -93,6 +108,22 @@ console.log("fizzbuzz success:",
 var phillySolarInstallationDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-solar-installations.json";
 var phillyCrimeDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-crime-snippet.json";
 var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json";
+
+
+var bikeData = [];
+// lat_final
+// long_final
+
+$.ajax(phillyBikeCrashesDataUrl).done(function(ajaxResponseValue) {
+  var bikeData = JSON.parse(ajaxResponseValue);
+  // console.log(bikeData);
+  // console.log(bikeData[0].lat_final);
+  _.each(bikeData, function(crash){
+    L.marker([crash.lat_final, crash.long_final]).addTo(map);
+  }
+);
+});
+
 
 
 /* =====================

@@ -32,9 +32,29 @@
        var one = justOne();
 ===================== */
 
+// Here is what we did in Part 1:
+      // var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json";
+      //
+      // var bikeData = [];
+      //
+      // $.ajax(phillyBikeCrashesDataUrl).done(function(ajaxResponseValue) {
+      //   var bikeData = JSON.parse(ajaxResponseValue);
+      //   _.each(bikeData, function(crash){
+      //     L.marker([crash.lat_final, crash.long_final]).addTo(map);
+      //   }
+      // );
+      // });
+
+var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json";
+var bikeData = [];
+
 // We set this to HTTP to prevent 'CORS' issues
-var downloadData = $.ajax("http://");
-var parseData = function() {};
+var downloadData = $.ajax(phillyBikeCrashesDataUrl);
+
+var parseData = function(downloadData) {
+  var bikeData = JSON.parse(downloadData);
+};
+
 var makeMarkers = function() {};
 var plotMarkers = function() {};
 

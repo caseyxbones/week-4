@@ -46,17 +46,29 @@
       // });
 
 var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json";
-var bikeData = [];
+// var bikeData = [];
 
 // We set this to HTTP to prevent 'CORS' issues
 var downloadData = $.ajax(phillyBikeCrashesDataUrl);
+var bikeData = [];
+var parseData = function(ajaxResponseValue) {
+  var bikeData = JSON.parse(ajaxResponseValue);
+  // return(JSON.parse(ajaxResponseValue));               // something is happening here. When I removed the var bikedata =  my map dosappeared in Chrome
+};
+var makeMarkers =  function (ajaxResponseValue) {
+    _.each(bikeData, function(crash) {
+      L.marker([crash.lat_final, crash.long_final]);
+    });
+  };
 
-var parseData = function(downloadData) {
-  var bikeData = JSON.parse(downloadData);
+var plotMarkers = function(markers) {
+    _.each(markers, function (made) {
+      L.marker(markers).addTo(map);
+    }
+    );
 };
 
-var makeMarkers = function() {};
-var plotMarkers = function() {};
+// I am no longer getting any console errors but I'm also not getting any markers :(
 
 
 /* =====================
@@ -103,8 +115,12 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 ===================== */
 
 downloadData.done(function(data) {
+  console.log("Ajax data pull complete, downloadData done");
   var parsed = parseData(data);
+  console.log("parseData executed, complete");
   var markers = makeMarkers(parsed);
+  console.log("makeMarkers executed, complete");
   plotMarkers(markers);
+  console.log("plotMarkers executed, complete");
   removeMarkers(markers);
 });

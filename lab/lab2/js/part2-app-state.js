@@ -50,25 +50,27 @@ var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA61
 
 // We set this to HTTP to prevent 'CORS' issues
 var downloadData = $.ajax(phillyBikeCrashesDataUrl);
-var bikeData = [];
+// var bikeData = [];                                                   // This isn't working
 var parseData = function(ajaxResponseValue) {
-  var bikeData = JSON.parse(ajaxResponseValue);
-  // return(JSON.parse(ajaxResponseValue));               // something is happening here. When I removed the var bikedata =  my map dosappeared in Chrome
+  // var bikeData = JSON.parse(ajaxResponseValue);                      // This wasn't working.
+  return(JSON.parse(ajaxResponseValue));                                // something is happening here. When I removed the var bikedata =  my map dosappeared in Chrome
 };
-var makeMarkers =  function (ajaxResponseValue) {
-    _.each(bikeData, function(crash) {
-      L.marker([crash.lat_final, crash.long_final]);
-    });
-  };
 
-var plotMarkers = function(markers) {
-    _.each(markers, function (made) {
-      L.marker(markers).addTo(map);
+var makeMarkers =  function (parsedInformation) {                       // This is working but I don't totally understand why?
+    var markersTemp = _.map(parsedInformation, function(crash) {
+      return L.marker([crash.lat_final, crash.long_final]);
+    }
+  );
+  return markersTemp;
+};
+
+var plotMarkers = function(markersAll) {
+    _.each(markersAll, function (individualMarker) {
+      individualMarker.addTo(map);
     }
     );
 };
 
-// I am no longer getting any console errors but I'm also not getting any markers :(
 
 
 /* =====================
@@ -84,7 +86,11 @@ var plotMarkers = function(markers) {
   user's input.
 ===================== */
 
-var removeMarkers = function() {};
+var removeMarkers = function(markersAll) {
+    _.each(markersAll, function (individualMarker){
+      map.removeLayer(individualMarker);
+    });
+};
 
 /* =====================
   Optional, stretch goal
@@ -115,12 +121,12 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 ===================== */
 
 downloadData.done(function(data) {
-  console.log("Ajax data pull complete, downloadData done");
+  // console.log("Ajax data pull complete, downloadData done");
   var parsed = parseData(data);
-  console.log("parseData executed, complete");
+  // console.log("parseData executed, complete");
   var markers = makeMarkers(parsed);
-  console.log("makeMarkers executed, complete");
+  // console.log("makeMarkers executed, complete");
   plotMarkers(markers);
-  console.log("plotMarkers executed, complete");
+  // console.log("plotMarkers executed, complete");
   removeMarkers(markers);
 });

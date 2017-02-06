@@ -25,3 +25,70 @@ body {
     overflow-y: auto;
     padding: 20px;
 }
+
+.head{
+    margin:5px;
+  }
+
+.button {
+    background-color: #EF4DB0;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    float: right;
+    font-size: 0.75em;
+}
+
+.bodytext{
+  padding-top: 20px;
+  padding-left: 5px;
+  padding-bottom: 0px;
+  font-family: Courier;
+  font-size: 1.0em;
+  color: #000000;
+}
+
+.form{
+  width: 100%;
+  margin-top: 5px;
+}
+
+.dropdown{
+  margin-top: 5px;
+}
+
+.schoolblock {
+    height: 150px;
+    background-color: #B0D825;
+    margin-top:15px;
+}
+
+.schoolname {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 1.10em;
+    color: #ffffff;
+}
+
+.schooltype {
+  padding-top: 0px;
+  padding-left: 10px;
+  font-family: Courier;
+  font-size: 1.10em;
+  font-weight: lighter;
+  color: #FFFFFF;
+}
+
+.address {
+  padding-top: 30px;
+  padding-left: 10px;
+  font-family: Courier;
+  font-size: 0.75em;
+  font-weight: lighter;
+  color: #FFFFFF;
+}

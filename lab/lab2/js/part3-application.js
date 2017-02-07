@@ -24,10 +24,22 @@
 ===================== */
 
 /* =====================
+  These are global variables that we can use throughout our application.
+===================== */
+// var myData;
+// var myMarkers = [L.marker([39.9522, -75.1639])];
+// var numericField1, numericField2, booleanField, stringField;
+
+
+
+
+
+/* =====================
   Define a resetMap function to remove markers from the map and clear the array of markers
 ===================== */
-var resetMap = function(markersAll) {
-    _.each(markersAll, function (individualMarker){
+
+var resetMap = function(myMarkers) {
+    _.each(myMarkers, function (individualMarker){
       map.removeLayer(individualMarker);
     });
 };
@@ -38,7 +50,7 @@ var resetMap = function(markersAll) {
   it down!
 ===================== */
 
-var getAndParseData = function(data) {
+var getAndParseData = function() {
     var parseData = function(ajaxResponseValue){
         $.ajax("https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json");
     };

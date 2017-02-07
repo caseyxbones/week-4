@@ -56,7 +56,7 @@ var parseData = function(ajaxResponseValue) {
   return(JSON.parse(ajaxResponseValue));                                // something is happening here. When I removed the var bikedata =  my map dosappeared in Chrome
 };
 
-var makeMarkers =  function (parsedInformation) {                       // This is working but I don't totally understand why? I feel like I got this right totally by accident. 
+var makeMarkers =  function (parsedInformation) {                       // This is working but I don't totally understand why? I feel like I got this right totally by accident.
     var markersTemp = _.map(parsedInformation, function(crash) {        // I added the _.map AFTER I'd been playing with return because it was all I could think to do that I hadn't tried but I'm still confused by it
       return L.marker([crash.lat_final, crash.long_final]);             // when I switched from trying to create var BikeData to Return my map stopped loading so I knew I was on the right track
     }
@@ -100,6 +100,13 @@ var removeMarkers = function(markersAll) {
   Note: You can add or remove from the code at the bottom of this file.
 ===================== */
 
+var filterData = function(allParsedData) {
+  return _.filter(allParsedData, function(crashObject){
+    return crashObject.FATAL === 1;
+  });
+};
+
+
 /* =====================
  Leaflet setup - feel free to ignore this
 ===================== */
@@ -123,10 +130,12 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 downloadData.done(function(data) {
   // console.log("Ajax data pull complete, downloadData done");
   var parsed = parseData(data);
-  // console.log("parseData executed, complete");
-  var markers = makeMarkers(parsed);
+  var filtered = filterData(parsed);
+  // console.log(parsed);
+  var markers = makeMarkers(filtered);
   // console.log("makeMarkers executed, complete");
   plotMarkers(markers);
   // console.log("plotMarkers executed, complete");
-  removeMarkers(markers);
+  // console.log(filtered);
+  // removeMarkers(markers);
 });

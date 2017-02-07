@@ -26,10 +26,10 @@
 /* =====================
   Define a resetMap function to remove markers from the map and clear the array of markers
 ===================== */
-var resetMap = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+var resetMap = function(markersAll) {
+    _.each(markersAll, function (individualMarker){
+      map.removeLayer(individualMarker);
+    });
 };
 
 /* =====================
@@ -37,11 +37,14 @@ var resetMap = function() {
   will be called as soon as the application starts. Be sure to parse your data once you've pulled
   it down!
 ===================== */
-var getAndParseData = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+
+var getAndParseData = function(data) {
+    var parseData = function(ajaxResponseValue){
+        $.ajax("https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json");
+    };
+    return(JSON.parse(ajaxResponseValue));
 };
+
 
 /* =====================
   Call our plotData function. It should plot all the markers that meet our criteria (whatever that

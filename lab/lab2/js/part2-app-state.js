@@ -56,12 +56,12 @@ var parseData = function(ajaxResponseValue) {
   return(JSON.parse(ajaxResponseValue));                                // something is happening here. When I removed the var bikedata =  my map dosappeared in Chrome
 };
 
-var makeMarkers =  function (parsedInformation) {                       // This is working but I don't totally understand why?
-    var markersTemp = _.map(parsedInformation, function(crash) {
-      return L.marker([crash.lat_final, crash.long_final]);
+var makeMarkers =  function (parsedInformation) {                       // This is working but I don't totally understand why? I feel like I got this right totally by accident. 
+    var markersTemp = _.map(parsedInformation, function(crash) {        // I added the _.map AFTER I'd been playing with return because it was all I could think to do that I hadn't tried but I'm still confused by it
+      return L.marker([crash.lat_final, crash.long_final]);             // when I switched from trying to create var BikeData to Return my map stopped loading so I knew I was on the right track
     }
   );
-  return markersTemp;
+  return markersTemp;                                                   // I added a second Return mostly so that I could test and see what MarkersTemp was and then it created markers, which was accidental
 };
 
 var plotMarkers = function(markersAll) {

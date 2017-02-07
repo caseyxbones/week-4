@@ -137,5 +137,5 @@ downloadData.done(function(data) {
   plotMarkers(markers);
   // console.log("plotMarkers executed, complete");
   // console.log(filtered);
-  // removeMarkers(markers);
+  // removeMarkers(markers);                                    // this is currently hidden so that I can test the filter function
 });

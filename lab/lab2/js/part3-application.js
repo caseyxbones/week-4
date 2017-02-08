@@ -38,7 +38,7 @@
   Define a resetMap function to remove markers from the map and clear the array of markers
 ===================== */
 
-var resetMap = function(myMarkers) {
+var resetMap = function() {
     _.each(myMarkers, function (individualMarker){
       map.removeLayer(individualMarker);
     });
@@ -49,12 +49,19 @@ var resetMap = function(myMarkers) {
   will be called as soon as the application starts. Be sure to parse your data once you've pulled
   it down!
 ===================== */
+var parseData = function(allAjaxResponseValues) {
+  return JSON.parse(allAjaxResponseValues);
+};
 
 var getAndParseData = function() {
-    var parseData = function(ajaxResponseValue){
-        $.ajax("https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json");
-    };
-    return(JSON.parse(ajaxResponseValue));
+  var downloadData = $.ajax("https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json")
+  .done(function(data){
+    myData = parseData(data);
+    // var test = parseData(data);
+    // console.log(test);
+    // return test;
+    // return(test);
+  });
 };
 
 
@@ -62,8 +69,30 @@ var getAndParseData = function() {
   Call our plotData function. It should plot all the markers that meet our criteria (whatever that
   criteria happens to be — that's entirely up to you)
 ===================== */
-var plotData = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+// var filterData = function(allParsedData) {
+//   return _.filter(allParsedData, function(crashObject){
+//     return crashObject.FATAL === parseInt(stringField);
+//   });
+// };
+var makeMarkersAndMap =  function (parsedVariables) {
+    var markersTemp = _.map(parsedVariables, function(crash) {
+      return L.marker([crash.lat_final, crash.long_final]).addTo(map);
+    }
+  );
+  return markersTemp;
+};
+
+var hasFatality = function(crashObject){
+  return crashObject.FATAL === parseInt(stringField); // If someone types "1" into the string field, this will turn it into a number and filter by that number
+};                                                    // I think you could also use the Boolean function for this because technically it's a boolean variable but I don't knpw how to do that
+
+// var filterData = function(allParsedData) {
+//   return _.filter(allParsedData, function(crashObject){
+//     return crashObject.FATAL === parseInt(stringField);
+//   });
+// };
+
+var plotData = function(){
+  var filtered = _.filter(myData, hasFatality);
+  return makeMarkersAndMap(filtered);
 };
